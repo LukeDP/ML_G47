@@ -1,42 +1,33 @@
 import pandas as pd
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
 
 # Carica il dataset
 teams_df = pd.read_csv('../../Other/basketballPlayoffs/teams.csv')
 
 # Seleziona le colonne di interesse
-columns_of_interest = ['year', 'rank', 'won', 'o_pts', 'd_pts', 'GP', 'name']
+columns_of_interest = ['year', 'rank', 'won', 'name']
 teams_df = teams_df[columns_of_interest]
 
-# Filtra i dati per gli ultimi 10 anni
-current_year = teams_df['year'].max()
-recent_years_df = teams_df[teams_df['year'] >= current_year - 10]
-
 # Divisione in caratteristiche (X) e target (y)
-X = recent_years_df.drop(['rank', 'name'], axis=1)  # Usa tutte le colonne eccetto 'won', 'rank' e 'name'
-y = recent_years_df['rank']  # Usa 'rank' come target
+X = teams_df.drop(['won', 'rank', 'name'], axis=1)  # Usa tutte le colonne eccetto 'won', 'rank' e 'name'
+y = teams_df['rank']  # Usa 'rank' come target
 
 # Divisione in training set e test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
-# Modello di regressione lineare
-model = LinearRegression()
+# Modello di Decision Tree
+model = DecisionTreeRegressor()
 model.fit(X_train, y_train)
 
-# Predizione per il prossimo anno
-next_year_data = recent_years_df[recent_years_df['year'] == current_year].copy()
-next_year_data.drop(['rank', 'name'], axis=1, inplace=True)  # Rimuovi le colonne non necessarie per la predizione
-predicted_ranks = model.predict(next_year_data)
+# Predizione per tutto il dataset
+teams_df['predicted_rank'] = model.predict(X)
 
-# Aggiungi le previsioni ai dati
-next_year_data['predicted_rank'] = predicted_ranks
+# Calcola la media dei ranking previsti per ogni squadra
+avg_predicted_ranks = teams_df.groupby('name')['predicted_rank'].mean().reset_index()
 
-# Unisci i risultati con i nomi dei team
-predicted_teams = next_year_data.join(recent_years_df[['name']].reset_index(drop=True))
+# Ordina per rank previsto medio e prendi i primi 8 team
+top_teams = avg_predicted_ranks.nsmallest(8, 'predicted_rank')
 
-# Ordina per rank previsto e prendi i primi 8 team
-top_teams = predicted_teams.nsmallest(8, 'predicted_rank')
-
-# Visualizza i team previsti
-print(top_teams[['name', 'predicted_rank']])
+# Mostra i team previsti
+print(top_teams)
