@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 teams_df = pd.read_csv('../../Other/basketballPlayoffs/teams.csv')
 
 # Seleziona le colonne di interesse
-columns_of_interest = ['year', 'rank', 'won', 'name']
+columns_of_interest = ['year', 'rank', 'won', 'o_pts', 'd_pts', 'name']
 teams_df = teams_df[columns_of_interest]
 
 # Divisione in caratteristiche (X) e target (y)
@@ -14,7 +14,7 @@ X = teams_df.drop(['won', 'rank', 'name'], axis=1)  # Usa tutte le colonne eccet
 y = teams_df['rank']  # Usa 'rank' come target
 
 # Divisione in training set e test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Modello di Decision Tree
 model = DecisionTreeRegressor()
