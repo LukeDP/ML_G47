@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12a8d6b5-0535-458a-b99b-cea05e5906a1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Code/2.Integration/integration.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/newDataset/players_teams_cleaned.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/newDataset/players_teams_cleaned.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/newDataset/teams_EA_cleaned.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/newDataset/teams_EA_cleaned.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/newDataset/teams_WE_cleaned.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/newDataset/teams_WE_cleaned.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/1.Cleaning/data_cleaning.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Code/1.Cleaning/data_cleaning.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/noteBook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/noteBook.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,21 +25,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "noemimessori"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;noemimessori&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/LukeDP/ML_G47.git",
-    "accountId": "ceb36bf0-6101-457a-b940-8044ab91fdd1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/LukeDP/ML_G47.git&quot;,
+    &quot;accountId&quot;: &quot;ceb36bf0-6101-457a-b940-8044ab91fdd1&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2oLA2nVkrX0f50JUA7Ae4kOyNaX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -51,6 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/noemi/Downloads/AC-FEUP-main/AC-FEUP-main",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -80,6 +80,7 @@
       <option name="presentableId" value="Default" />
       <updated>1730638280415</updated>
       <workItem from="1730638281557" duration="8823000" />
+      <workItem from="1730905989788" duration="2170000" />
     </task>
     <servers />
   </component>
