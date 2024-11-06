@@ -5,13 +5,14 @@ from scipy import stats
 import seaborn as sns
 import os
 
+
 def nulls_values_by_column(df, plot_size=(12, 8)):
     null_counts = df.isnull().sum()
-    plt.figure(figsize=plot_size)
-    sns.barplot(x=null_counts.index, y=null_counts.values, palette="viridis")
-    plt.title("Number of null values per column")
-    plt.xticks(rotation=90)
-    plt.show()
+    plot = null_counts.plot(kind="bar", title="Number of null values per column", figsize = plot_size)
+    for i, v in enumerate(null_counts):
+        plot.text(i, v, str(v), ha="center", va="bottom")
+    return plot
+
 
 
 def plot_unique_counts(counts_df, threshold, plot_size):
