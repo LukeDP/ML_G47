@@ -190,3 +190,26 @@ def feature_aggregation_pca(df, n_components, columns_to_keep):
         df_result[col] = df_to_keep[col].reset_index(drop=True)
 
     return df_result
+
+
+def update_team_data(df_teams_path, df_players, player_stat_column, team_stat_column, output_path):
+    df_teams = pd.read_csv(df_teams_path)
+
+    sum_stats = df_players.groupby(['tmID', 'year'])[player_stat_column].sum().reset_index()
+    sum_stats.rename(columns={player_stat_column: f'sum_{player_stat_column}Player'}, inplace=True)
+    df_compare = pd.merge(df_teams, sum_stats, on=['tmID', 'year'], how='left')
+
+    # mismatch and update values
+    df_compare[f'diff_{player_stat_column}'] = df_compare[team_stat_column] - df_compare[
+        f'sum_{player_stat_column}Player']
+    mismatches = df_compare[df_compare[f'diff_{player_stat_column}'] != 0]
+
+    if not mismatches.empty:
+        print(f"Mismatches found for {team_stat_column}:")
+        print(mismatches[
+                  ['tmID', 'year', team_stat_column, f'sum_{player_stat_column}Player', f'diff_{player_stat_column}']])
+    df_compare.loc[df_compare[f'diff_{player_stat_column}'] != 0, team_stat_column] = df_compare[
+        f'sum_{player_stat_column}Player']
+    
+    df_teams_updated = df_compare.drop(columns=[f'sum_{player_stat_column}Player', f'diff_{player_stat_column}'])
+    df_teams_updated.to_csv(output_path, index=False)
