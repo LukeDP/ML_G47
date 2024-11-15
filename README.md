@@ -10,7 +10,8 @@ pip install -r requirements.txt
 ## Usage
 To run the project, follow these steps:
 
-Run the notebooks script (to see the output associated to each notebook you'll need to run these files manually):
+1. Go to `Code` folder
+2. Run the notebooks script (to see the output associated to each notebook you'll need to run these files manually):
 ```
 python exec_pipeline.py
 ```
