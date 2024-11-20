@@ -10,6 +10,7 @@ import math
 import copy
 import sys
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
 def get_overall_age(birth_dates):
@@ -213,3 +214,34 @@ def update_team_data(df_teams_path, df_players, player_stat_column, team_stat_co
     
     df_teams_updated = df_compare.drop(columns=[f'sum_{player_stat_column}Player', f'diff_{player_stat_column}'])
     df_teams_updated.to_csv(output_path, index=False)
+
+
+def custom_scaling(df, numerical_cols):
+    """
+    Apply StandardScaler to columns with Gaussian distribution,
+    and MinMaxScaler to other columns.
+
+    Parameters:
+    - df: DataFrame to scale
+    - numerical_cols: List of numerical columns to scale
+
+    Returns:
+    - Scaled DataFrame
+    """
+    gaussian_cols = []
+    other_cols = []
+
+    # Identifying columns based on Gaussian distribution
+    for col in numerical_cols:
+        if abs(df[col].skew()) < 0.5:  # Assuming skewness < 0.5 indicates Gaussian
+            gaussian_cols.append(col)
+        else:
+            other_cols.append(col)
+
+    # Scaling
+    if gaussian_cols:
+        df[gaussian_cols] = StandardScaler().fit_transform(df[gaussian_cols])
+    if other_cols:
+        df[other_cols] = MinMaxScaler().fit_transform(df[other_cols])
+
+    return df
