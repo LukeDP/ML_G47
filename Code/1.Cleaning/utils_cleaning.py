@@ -60,7 +60,6 @@ def histogram_plot(df, max_zscore=3, plot_size=(12, 8)):
         ax.set_xlabel(column)
         ax.set_ylabel("Frequency")
 
-        # Calculate and display the standard deviation
         std_dev = df[column].std()
         ax.axvline(
             x=df[column].mean() - std_dev, color="g", linestyle="--", label="std dev"
@@ -84,7 +83,6 @@ def histogram_plot(df, max_zscore=3, plot_size=(12, 8)):
         )
         ax.legend()
 
-    # If the number of variables is odd, remove the empty subplot
     if num_columns % 2 != 0:
         fig.delaxes(axes[num_rows - 1, 1])
 

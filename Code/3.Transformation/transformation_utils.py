@@ -16,7 +16,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 def get_overall_age(birth_dates):
     birth_years = []
     for i in birth_dates:
-        if pd.notna(i):  # Controlla se il valore non è null
+        if pd.notna(i):
             birth_years.append(int(i.split("-")[0]))
     return sum(birth_years) / len(birth_years) if birth_years else 0
 
@@ -112,7 +112,6 @@ def split_data(df, year, target):
 
 
 def test_model(model, df, year, target):
-    # Use to simultaneously test the model on the test and train data
     x_train, y_train, x_test, y_test = split_data(df, year, target)
     x_test_id = x_test["tmID"]
 
@@ -173,16 +172,15 @@ def select_features(df, target, key_features, num_features=26):
 def feature_aggregation_pca(df, n_components, columns_to_keep):
     column_names = [
         f"PC{i + 1}" for i in range(n_components)
-    ]  # Create custom column names
+    ]
 
     df_to_keep = pd.DataFrame(df[columns_to_keep])
     df.drop(columns_to_keep, axis=1, inplace=True)
 
-    # Assuming 'X' is your data
     scaler = StandardScaler()
     x_scaled = scaler.fit_transform(df)
 
-    pca = PCA(n_components=n_components)  # Choose the number of components you want
+    pca = PCA(n_components=n_components)
     x_pca = pca.fit_transform(x_scaled)
 
     df_result = pd.DataFrame(data=x_pca, columns=column_names)
@@ -231,14 +229,12 @@ def custom_scaling(df, numerical_cols):
     gaussian_cols = []
     other_cols = []
 
-    # Identifying columns based on Gaussian distribution
     for col in numerical_cols:
         if abs(df[col].skew()) < 0.5:  # Assuming skewness < 0.5 indicates Gaussian
             gaussian_cols.append(col)
         else:
             other_cols.append(col)
 
-    # Scaling
     if gaussian_cols:
         df[gaussian_cols] = StandardScaler().fit_transform(df[gaussian_cols])
     if other_cols:
